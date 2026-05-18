@@ -650,6 +650,9 @@ GRANT SELECT ON VIEW tb_101.semantic_layer.customer_loyalty_metrics_v TO ROLE PU
 GRANT READ ON STAGE tb_101.semantic_layer.semantic_model_stage TO ROLE tb_admin;
 GRANT WRITE ON STAGE tb_101.semantic_layer.semantic_model_stage TO ROLE tb_admin;
 
+/*
+-- [コメントアウト] 以下はレガシーノートブック時代の手順のため省略
+
 -- Notbook 作成スクリプト
 // Step1: テーブル作成 //
 -- ロールの指定
@@ -672,13 +675,13 @@ CREATE OR REPLACE STAGE tb_101.notebook_schema.notebook encryption = (type = 'sn
 -- Git連携のため、API統合を作成する
 CREATE OR REPLACE API INTEGRATION tb_101_git_api_integration
   API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ('https://github.com/sfc-gh-ttakahashi/')
+  API_ALLOWED_PREFIXES = ('<GITHUB_ORG_URL>')
   ENABLED = TRUE;
 
 -- GIT統合の作成
 CREATE OR REPLACE GIT REPOSITORY TB_101_GIT_INTEGRATION_FOR_HANDSON
   API_INTEGRATION = tb_101_git_api_integration
-  ORIGIN = 'https://github.com/sfc-gh-ttakahashi/zero-to-snowflake-notebooks.git';
+  ORIGIN = '<GITHUB_REPO_URL>';
 
 -- チェックする
 ls @TB_101_GIT_INTEGRATION_FOR_HANDSON/branches/main;
@@ -722,3 +725,4 @@ CREATE OR REPLACE STREAMLIT sis_snowretail_analysis_dev
     FROM @TB_101_GIT_INTEGRATION_FOR_HANDSON/branches/main/demo/streamlit
     MAIN_FILE = 'streamlit_app.py'
     QUERY_WAREHOUSE = tb_dev_wh;
+*/
